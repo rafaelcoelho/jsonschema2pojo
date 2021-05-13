@@ -52,7 +52,7 @@ public interface GenerationConfig {
    */
   boolean isIncludeTypeInfo();
 
-	/**
+    /**
      * Gets the 'includeConstructorPropertiesAnnotation' configuration option.
      *
      * @return whether to include JDK Constructor Properties. Used by serialization libraries to get parameter names of constructors at runtime. (Not Available on Android)
@@ -610,5 +610,11 @@ public interface GenerationConfig {
   default boolean isUseInnerClassBuilders() {
     return false;
   }
-
+  
+  /**
+   * Whether to mark generated classes with the annotation <code>javax.annotation.@Generated</code>
+   *
+   */
+  boolean isIncludeGeneratedAnnotation();
+  
 }

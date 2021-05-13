@@ -35,7 +35,6 @@ import org.jsonschema2pojo.InclusionLevel;
 import org.jsonschema2pojo.NoopAnnotator;
 import org.jsonschema2pojo.SourceSortOrder;
 import org.jsonschema2pojo.SourceType;
-import org.jsonschema2pojo.cli.CommandLineLogger.LogLevel;
 import org.jsonschema2pojo.cli.CommandLineLogger.LogLevelValidator;
 import org.jsonschema2pojo.rules.RuleFactory;
 
@@ -243,6 +242,9 @@ public class Arguments implements GenerationConfig {
 
     @Parameter(names = {"--print-log-levels"}, description = "Prints available log levels and exit.")
     private boolean printLogLevels = false;
+
+    @Parameter(names = {"--omit-generated-annotation"}, description = "Omit @Generated annotation on generated types")
+    private boolean omitGeneratedAnnotation = false;
 
     private static final int EXIT_OKAY = 0;
     private static final int EXIT_ERROR = 1;
@@ -599,4 +601,7 @@ public class Arguments implements GenerationConfig {
                 .stream()
                 .collect(Collectors.toMap(m -> m.split(":")[0], m -> m.split(":")[1]));
     }
+    
+    @Override
+    public boolean isIncludeGeneratedAnnotation() { return !omitGeneratedAnnotation; }
 }

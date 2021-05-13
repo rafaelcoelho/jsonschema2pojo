@@ -359,7 +359,7 @@ public class Jsonschema2PojoMojo extends AbstractMojo implements GenerationConfi
      * @parameter property="jsonschema2pojo.useOptionalForGetters"
      *            default-value="false"
      */
-     private boolean useOptionalForGetters = false;
+    private boolean useOptionalForGetters = false;
 
     /**
      * The type of input documents that will be read
@@ -477,8 +477,7 @@ public class Jsonschema2PojoMojo extends AbstractMojo implements GenerationConfi
     private boolean useCommonsLang3 = false;
 
     /**
-     * **EXPERIMENTAL** Whether to make the generated types 'parcelable' (for
-     * Android development).
+     * Whether to make the generated types 'parcelable' (for Android development).
      *
      * @parameter property="jsonschema2pojo.parcelable"
      *            default-value="false"
@@ -796,6 +795,16 @@ public class Jsonschema2PojoMojo extends AbstractMojo implements GenerationConfi
     private boolean includeConstructorPropertiesAnnotation = false;
 
     /**
+     * Whether to include a javax.annotation.Generated (Java 8 and
+     * lower) or javax.annotation.processing.Generated (Java 9+) in
+     * on generated types.
+     *
+     * @parameter property="jsonschema2pojo.includeGeneratedAnnotation"
+     *            default-value="true"
+     */
+    private boolean includeGeneratedAnnotation = true;
+
+    /**
      * Executes the plugin, to read the given source and behavioural properties
      * and generate POJOs. The current implementation acts as a wrapper around
      * the command line interface.
@@ -1019,7 +1028,9 @@ public class Jsonschema2PojoMojo extends AbstractMojo implements GenerationConfi
     }
 
     @Override
-    public boolean isUseOptionalForGetters() { return useOptionalForGetters; }
+    public boolean isUseOptionalForGetters() {
+        return useOptionalForGetters;
+    }
 
     @Override
     public SourceType getSourceType() {
@@ -1051,6 +1062,7 @@ public class Jsonschema2PojoMojo extends AbstractMojo implements GenerationConfi
         return useJodaLocalTimes;
     }
 
+    @Deprecated
     public boolean isUseCommonsLang3() {
         return useCommonsLang3;
     }
@@ -1237,5 +1249,10 @@ public class Jsonschema2PojoMojo extends AbstractMojo implements GenerationConfi
     @Override
     public boolean isUseInnerClassBuilders() {
         return useInnerClassBuilders;
+    }
+
+    @Override
+    public boolean isIncludeGeneratedAnnotation() {
+        return includeGeneratedAnnotation;
     }
 }

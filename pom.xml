@@ -10,7 +10,7 @@
 
     <groupId>org.jsonschema2pojo</groupId>
     <artifactId>jsonschema2pojo</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
 
     <packaging>pom</packaging>
     <name>jsonschema2pojo</name>
@@ -49,17 +49,25 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <groovy.version>1.8.6</groovy.version>
         <gradle.version>5.6</gradle.version>
-        <gson.version>2.5</gson.version>
+        <gson.version>2.8.6</gson.version>
         <moshi.version>1.5.0</moshi.version>
         <jackson2x.version>2.9.10</jackson2x.version>
-        <jackson2x.databind.version>2.9.10.7</jackson2x.databind.version>
+        <jackson2x.databind.version>2.9.10.8</jackson2x.databind.version>
     </properties>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+    </reporting>
 
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.9.1</version>
+                </plugin>
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -137,6 +145,7 @@
                     <aggregate>true</aggregate>
                     <encoding>UTF-8</encoding>
                     <excludes>
+                        <exclude>**/jsonschema2pojo-jdk-annotation/**</exclude>
                         <exclude>**/src/main/java/org/jsonschema2pojo/util/Inflector.java</exclude>
                     </excludes>
                     <failIfMissing>true</failIfMissing>
@@ -166,7 +175,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                     <source>1.8</source>
@@ -200,7 +209,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>2.22.1</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -224,7 +233,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.1</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -245,7 +254,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.1.2</version>
+                        <version>2.4</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -333,7 +342,7 @@
             <dependency>
                 <groupId>com.google.code.javaparser</groupId>
                 <artifactId>javaparser</artifactId>
-                <version>1.0.10</version>
+                <version>1.0.11</version>
             </dependency>
             <dependency>
                 <groupId>com.sun.codemodel</groupId>
@@ -349,7 +358,7 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.4</version>
+                <version>2.8.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-lang</groupId>
@@ -380,13 +389,13 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
-                <version>1.7.24</version>
+                <version>1.7.30</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.github.tomakehurst</groupId>
                 <artifactId>wiremock</artifactId>
-                <version>2.5.1</version>
+                <version>2.27.2</version>
                 <scope>test</scope>
                 <exclusions>
                     <exclusion>
@@ -421,12 +430,12 @@
             <dependency>
                 <groupId>org.apache.maven.shared</groupId>
                 <artifactId>maven-shared-utils</artifactId>
-                <version>0.6</version>
+                <version>3.3.4</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jdt.core.compiler</groupId>
                 <artifactId>ecj</artifactId>
-                <version>4.4.2</version>
+                <version>4.6.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

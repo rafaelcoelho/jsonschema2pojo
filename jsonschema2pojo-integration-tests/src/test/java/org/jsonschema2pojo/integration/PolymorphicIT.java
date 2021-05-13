@@ -31,15 +31,14 @@
 
 package org.jsonschema2pojo.integration;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import static org.jsonschema2pojo.integration.util.CodeGenerationHelper.config;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.jsonschema2pojo.integration.util.CodeGenerationHelper.*;
+import static org.junit.Assert.*;
 
 import org.jsonschema2pojo.integration.util.Jsonschema2PojoRule;
 import org.junit.Rule;
 import org.junit.Test;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class PolymorphicIT {
     @Rule public Jsonschema2PojoRule schemaRule = new Jsonschema2PojoRule();
@@ -55,15 +54,15 @@ public class PolymorphicIT {
         assertNotNull(supertype.getAnnotation(JsonTypeInfo.class));
     }
 
-	@Test
-	public void extendsWithPolymorphicDeserializationWithJackson2() throws ClassNotFoundException {
+    @Test
+    public void extendsWithPolymorphicDeserializationWithJackson2() throws ClassNotFoundException {
 
-		ClassLoader resultsClassLoader = schemaRule.generateAndCompile("/schema/polymorphic/extendsSchema.json", "com.example",
-																	   config("annotationStyle", "JACKSON2"));
+        ClassLoader resultsClassLoader = schemaRule.generateAndCompile("/schema/polymorphic/extendsSchema.json", "com.example",
+                                                                       config("annotationStyle", "JACKSON2"));
 
-		Class<?> subtype = resultsClassLoader.loadClass("com.example.ExtendsSchema");
-		Class<?> supertype = subtype.getSuperclass();
+        Class<?> subtype = resultsClassLoader.loadClass("com.example.ExtendsSchema");
+        Class<?> supertype = subtype.getSuperclass();
 
-		assertNotNull(supertype.getAnnotation(JsonTypeInfo.class));
-	}
+        assertNotNull(supertype.getAnnotation(JsonTypeInfo.class));
+    }
 }
